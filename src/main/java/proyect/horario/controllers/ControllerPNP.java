@@ -147,7 +147,11 @@ public class ControllerPNP {
        return  ResponseEntity.status(HttpStatus.OK).body(pnps);
     }
 
-
+    @GetMapping("/dtopnpsinparametros")
+    public ResponseEntity<List<Dtopnp>> dtosinparametros(){
+        List<Dtopnp> listapnp=ipnp.dtopnpsinparametros();
+        return ResponseEntity.status(HttpStatus.OK).body(listapnp);
+    }
 
 
 

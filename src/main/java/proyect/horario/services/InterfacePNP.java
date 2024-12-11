@@ -39,4 +39,5 @@ public interface InterfacePNP {
 
        List<Pnp> pnpporpelotonyarea (Integer idcabe, Integer area);
 
+       List<Dtopnp> dtopnpsinparametros();
 }

@@ -97,7 +97,23 @@ public class ServicioPNP implements  InterfacePNP {
                 (String) data[6]
         )).collect(Collectors.toList());
     }
+    @Override
+    public List<Dtopnp> dtopnpsinparametros() {
 
+        List<Object[]> dtopnplista = repositoryPNP.dtopnpsinparametros();
+
+        return dtopnplista.stream().map(
+                data -> new Dtopnp(
+                        (String) data[0], // nombregrado
+                        (String) data[1], // apellido
+                        (String) data[2], // nombre
+                        (String) data[3], // nombrecargo
+                        (String) data[4],  // descripcion
+                        (String) data[5],
+                        (String) data[6]
+                )
+        ).collect(Collectors.toList());
+    }
 
 
 
@@ -144,6 +160,8 @@ public class ServicioPNP implements  InterfacePNP {
     public List<Pnp> pnpporpelotonyarea(Integer idcabe, Integer area) {
         return repositoryPNP.pnpporpelotonyarea(idcabe, area);
     }
+
+
 }
 
 

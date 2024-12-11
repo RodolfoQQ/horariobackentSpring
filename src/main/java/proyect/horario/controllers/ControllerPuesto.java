@@ -138,11 +138,14 @@ public class ControllerPuesto {
         Cabecerapuesto cabecerapuesto = serviciocabecera.findbyidcabecerapuesto(idcabecerapuesto);
         Unidadmobil unidadmobil = iServicemobil.findUnidadmobilbyid(idunidadmobil);
         if (unidadmobil != null && cabecerapuesto != null) {
+
             serviciocabecera.updatemobilencabecera(idunidadmobil, idcabecerapuesto);
             String mobil = unidadmobil.getDescripcion();
             System.out.println("data ----> " + mobil);
+
             iServicemobil.updatemobilOcupada(unidadmobil.getDescripcion());
             response.put("mensaje", "se actualizo correctamente");
+
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } else {
             response.put("mensaje", "error en los valores selecionados");

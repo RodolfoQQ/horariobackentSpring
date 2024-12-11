@@ -36,6 +36,17 @@ public interface RepositoryPNP extends JpaRepository<Pnp,Integer>{
             "where a.descripcion = :peloton and  p.idestado =1", nativeQuery = true)
     List<Object[]> dtopnp(@Param("peloton") String peloton);
 
+    @Query(value ="select g.nombregrado , p.apellido ,p.nombre, c.nombrecargo, a.descripcion, p.cip, e.nombreestado  from pnp p inner join areatrabajo a\n" +
+            "          on  p.idareatrabajo =a.idareatrabajo\n" +
+            "            inner join cargo c \n" +
+            "            on p.cargo  =c.idcargo\n" +
+            "            inner join grado g on p.grado =g.idgrado inner join estado e on p.idestado =e.idestado", nativeQuery = true)
+    List<Object[]> dtopnpsinparametros();
+
+
+
+
+
     @Query(value ="\n" +
             "select g.nombregrado , p.apellido ,p.nombre, c.nombrecargo, a.descripcion, p.cip, e.nombreestado  from pnp p inner join areatrabajo a \n" +
             "on  p.idareatrabajo =a.idareatrabajo\n" +

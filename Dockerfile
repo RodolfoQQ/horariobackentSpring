@@ -4,6 +4,10 @@ FROM openjdk:21-jdk-slim
 # Instalamos git y maven
 RUN apt-get update && apt-get install -y git maven
 
+EXPOSE 8080
+
+COPY dump-horario-202412121858.sql /docker-entrypoint-initdb.d/dump-horario.sql
+
 # Clonamos el repositorio desde GitHub
 RUN git clone https://github.com/RodolfoQQ/horariobackentSpring.git
 
@@ -14,14 +18,12 @@ WORKDIR /horariobackentSpring
 RUN mvn clean package -DskipTests
 
 # Copiar archivo SQL al contenedor de MySQL
-COPY dump-horario-202412121858.sql /docker-entrypoint-initdb.d/dump-horario.sql
 
 # Descargar y preparar el script wait-for-it
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
 # Exponemos el puerto de la aplicación Spring
-EXPOSE 8080
 
 # Comando para iniciar la aplicación
 ENTRYPOINT ["/wait-for-it.sh", "horario-mysql:3306", "--", "java", "-jar", "target/horario-0.0.1-SNAPSHOT.jar"]

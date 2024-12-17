@@ -13,6 +13,9 @@ WORKDIR /horariobackentSpring
 # Construimos el proyecto con Maven
 RUN mvn clean package -DskipTests
 
+# Copiar archivo SQL al contenedor de MySQL
+COPY dump-horario-202412121858.sql /docker-entrypoint-initdb.d/dump-horario.sql
+
 # Descargar y preparar el script wait-for-it
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh

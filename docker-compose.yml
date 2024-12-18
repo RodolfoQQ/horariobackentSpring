@@ -1,32 +1,22 @@
-version: '3.8'
+version: '3.7'
 
 services:
-  spring-app:
+  web:
     build: .
-    container_name: horario-spring-app
-    environment:
-      DB_URL: jdbc:mysql://horario-mysql:3306/horario?useSSL=false&allowPublicKeyRetrieval=true
-      DB_USER: root
-      DB_PASSWORD: oldnavy7
-    restart: always
     ports:
       - "8080:8080"
     depends_on:
-      horario-mysql:
-        condition: service_healthy
-
-  horario-mysql:
-    image: mysql:8
-    container_name: horario-mysql
-    ports:
-      - "3307:3306"
+      - db
     environment:
-      MYSQL_ROOT_PASSWORD: oldnavy7
-      MYSQL_DATABASE: horario
-    restart: always
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 5
+      - SPRING_DATASOURCE_URL=${DB_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
     volumes:
-      - ./dump-horario-202412121858.sql:/docker-entrypoint-initdb.d/dump-horario.sql
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:

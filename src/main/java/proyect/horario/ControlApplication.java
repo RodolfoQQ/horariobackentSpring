@@ -21,7 +21,10 @@ public class ControlApplication {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("api/**")
 						.allowedMethods("GET","POST","PUT","DELETE")
-						.allowedOrigins("*");
+						.allowedOrigins(
+								"https://localhost:4300",   // Frontend en desarrollo local
+								"https://143.110.147.193"
+						);
 
 
 

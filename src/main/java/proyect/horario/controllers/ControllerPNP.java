@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/pnp")
-@CrossOrigin(origins={"http://localhost:4300"},originPatterns = {"*"})
+//@CrossOrigin(origins={"https://localhost:4300"},originPatterns = {"*"})
 public class ControllerPNP {
 
     private InterfaceCArgo icargo;

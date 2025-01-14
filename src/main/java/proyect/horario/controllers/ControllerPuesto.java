@@ -17,7 +17,7 @@ import static java.lang.Integer.parseInt;
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
-@CrossOrigin(origins={"http://localhost:4300"},originPatterns = {"*"})
+//@CrossOrigin(origins={"http://localhost:4300"},originPatterns = {"*"})
 public class ControllerPuesto {
 
     private InterfaceCabecera serviciocabecera;
